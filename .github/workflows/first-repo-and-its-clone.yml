@@ -30,9 +30,21 @@ jobs:
       # Runs a single command using the runners shell
       - name: Start workflow message
         run: echo "Now running build workflow."
+  repo_forked:
 
-      # Runs a set of commands using the runners shell
-      - name: Ending workflow message
-        run: |
-         echo "Now ending build workflow."
-         echo "Have a great day!".
+   runs-on: ubuntu-latest
+   if: github.event_name == 'fork'
+   needs: build
+   env:
+     user: Steven Universe
+   steps:
+     - name: Inform Steven
+       run: |
+         echo "Hello $user, this job is about to end."
+         echo "Job has ended."
+
+       # Runs a set of commands using the runners shell
+          - name: Ending workflow message
+         run: |
+          echo "Now ending build workflow."
+          echo "Have a great day!".
